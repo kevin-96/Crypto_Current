@@ -4,6 +4,9 @@
     tools:showIn="navigation_view">
 
     <group android:checkableBehavior="single">
+        <item android:id="@+id/nav_splash"
+            android:icon="@drawable/ic_share"
+            android:title="Splash Screen"/>
         <item android:id="@+id/nav_wallet"
             android:icon="@drawable/ic_wallet"
             android:title="Wallet"/>
