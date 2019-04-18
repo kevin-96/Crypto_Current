@@ -1,5 +1,6 @@
 package edu.quinnipiac.ser210.navdrawer;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class WalletActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
 
     @Override
@@ -41,24 +42,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.nav_splash:
+                Intent intent = new Intent(WalletActivity.this, SplashScreenActivity.class);
+                WalletActivity.this.startActivity(intent);
+                break;
             case R.id.nav_wallet:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new WalletFragment()).commit();
+                       new WalletFragment()).commit();
                 break;
             case R.id.nav_convert:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ConvertFragment()).commit();
+                Intent intentConvert = new Intent(WalletActivity.this, ConvertActivity.class);
+                WalletActivity.this.startActivity(intentConvert);
                 break;
             case R.id.nav_coinList:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CoinListFragment()).commit();
+                Intent intentCoinList = new Intent(WalletActivity.this, CoinListActivity.class);
+                WalletActivity.this.startActivity(intentCoinList);
                 break;
             case R.id.nav_share:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingFragment()).commit();
+                Intent intentSetting = new Intent(WalletActivity.this, SettingActivity.class);
+                WalletActivity.this.startActivity(intentSetting);
                 break;
         }
 

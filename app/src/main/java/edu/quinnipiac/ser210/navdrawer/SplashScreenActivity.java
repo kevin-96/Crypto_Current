@@ -1,5 +1,6 @@
 package edu.quinnipiac.ser210.navdrawer;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -11,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class SplashScreen extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SplashScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
     @Override
@@ -36,6 +37,7 @@ public class SplashScreen extends AppCompatActivity implements NavigationView.On
                     new SplashScreenFragment()).commit();
             navigationView.setCheckedItem(R.id.nav_splash);
         }
+
     }
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -45,29 +47,31 @@ public class SplashScreen extends AppCompatActivity implements NavigationView.On
                         new SplashScreenFragment()).commit();
                 break;
             case R.id.nav_wallet:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_splash,
-                        new WalletFragment()).commit();
+                Intent intentWallet = new Intent(SplashScreenActivity.this, WalletActivity.class);
+                SplashScreenActivity.this.startActivity(intentWallet);
                 break;
             case R.id.nav_convert:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new ConvertFragment()).commit();
+                Intent intentConvert = new Intent(SplashScreenActivity.this, ConvertActivity.class);
+                SplashScreenActivity.this.startActivity(intentConvert);
                 break;
             case R.id.nav_coinList:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new CoinListFragment()).commit();
+                Intent intentCoinList = new Intent(SplashScreenActivity.this, CoinListActivity.class);
+                SplashScreenActivity.this.startActivity(intentCoinList);
                 break;
             case R.id.nav_share:
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new SettingFragment()).commit();
+                Intent intentSetting = new Intent(SplashScreenActivity.this, SettingActivity.class);
+                SplashScreenActivity.this.startActivity(intentSetting);
                 break;
         }
 
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
