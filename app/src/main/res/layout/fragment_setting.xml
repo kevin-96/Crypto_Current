@@ -6,5 +6,10 @@
     android:background="#7ceb9d"
     tools:context=".SettingFragment">
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Setting Fragment"
+        android:textSize="30sp" />
 </FrameLayout>
