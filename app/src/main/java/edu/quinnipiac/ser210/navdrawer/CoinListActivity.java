@@ -12,7 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-public class CoinListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+public class CoinListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
 
@@ -40,6 +40,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
 
     }
 
+    // method for changing activities from the navigation drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {

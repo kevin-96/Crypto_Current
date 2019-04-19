@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="8dp"
-        android:text="Crypto Current"
+        android:text="@string/title"
         android:textColor="#000"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
 
@@ -24,6 +24,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#000"
-        android:text="Best Crypto App Ever!!!"/>
+        android:text="@string/sub_title"/>
 
 </LinearLayout>

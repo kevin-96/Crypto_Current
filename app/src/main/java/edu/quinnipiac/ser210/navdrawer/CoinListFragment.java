@@ -1,14 +1,17 @@
+/*
+ *Fragment fo the coin list screen activity
+ */
 package edu.quinnipiac.ser210.navdrawer;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-
-public class CoinListFragment extends Fragment {
+//Final fragment will use recycle view
+public class CoinListFragment extends ListFragment {
 
     @Nullable
     @Override

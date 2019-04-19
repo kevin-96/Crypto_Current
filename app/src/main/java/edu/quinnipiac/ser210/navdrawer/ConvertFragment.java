@@ -1,3 +1,6 @@
+/*
+ *Fragment fo the convert screen activity
+ */
 package edu.quinnipiac.ser210.navdrawer;
 
 import android.os.Bundle;

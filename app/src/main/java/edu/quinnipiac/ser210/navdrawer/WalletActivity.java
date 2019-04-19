@@ -19,10 +19,10 @@ public class WalletActivity extends AppCompatActivity implements NavigationView.
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        // links the tool bar to the activity
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        // links the navigation drawer
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
@@ -39,6 +39,7 @@ public class WalletActivity extends AppCompatActivity implements NavigationView.
         }
     }
 
+    // method for changing activities from the navigation drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -48,7 +49,7 @@ public class WalletActivity extends AppCompatActivity implements NavigationView.
                 break;
             case R.id.nav_wallet:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                       new WalletFragment()).commit();
+                        new WalletFragment()).commit();
                 break;
             case R.id.nav_convert:
                 Intent intentConvert = new Intent(WalletActivity.this, ConvertActivity.class);

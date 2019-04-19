@@ -10,28 +10,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class SplashScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-
+        // gives the activity a tool bar
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
+        // Creates the drawer
         drawer = findViewById(R.id.drawer_layout_splash);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Shows the fragment the fragment on the activity
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_splash,
                     new SplashScreenFragment()).commit();
@@ -39,6 +42,9 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
         }
 
     }
+
+    // The following is for the navigation drawer so it calls new activities when the selected item is clicked
+    // Will remove the drawer in the splash screen for final product, only here for debugging purposes
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
@@ -59,6 +65,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
                 SplashScreenActivity.this.startActivity(intentCoinList);
                 break;
             case R.id.nav_share:
+                // The toast is a placeholder in the meantime until we retrieve data to share
                 Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:

@@ -1,9 +1,33 @@
 <resources>
-    <string name="app_name">Crypto-Current</string>
+    <string name="app_name">Crypto - Current</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string-array name="coins">
+        <item>Bitcoin</item>
+        <item>Bitcoin Cash</item>
+        <item>Litecoin</item>
+        <item>XRP</item>
+        <item>Ethereum</item>
+        <item>Jah Coin</item>
+        <item>Nano</item>
+        <item>Dogecoin</item>
+        <item>Tether</item>
+        <item>Dash</item>
+        <item>Zcash</item>
+
+    </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="start">Start</string>
+    <string name="initial_text">Crypto - Current \nDevelopers:  \nKevin Sangurima  \nBrian Carballo</string>
+    <string name="default_currency">Default Currency</string>
+    <string name="change_app_theme">Change App Theme</string>
+    <string name="delete_all_settings_and_data">Delete all settings and data</string>
+    <string name="delete">Delete</string>
+    <string name="convert">Convert</string>
+    <string name="amount">Amount</string>
+    <string name="sub_title">Best Crypto App Ever!!!</string>
+    <string name="title">Crypto Current</string>
 </resources>

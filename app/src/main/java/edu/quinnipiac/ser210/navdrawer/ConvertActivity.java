@@ -41,6 +41,7 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
 
     }
 
+    // method for changing activities from the navigation drawer
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
