@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 public class SettingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    private CoinInfoHandler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,7 @@ public class SettingActivity extends AppCompatActivity implements NavigationView
             navigationView.setCheckedItem(R.id.nav_setting);
         }
 
+        handler = new CoinInfoHandler(10);
     }
 
     // method for changing activities from the navigation drawer

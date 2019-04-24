@@ -13,9 +13,14 @@ import android.view.ViewGroup;
 //Final fragment will use recycle view
 public class CoinListFragment extends ListFragment {
 
+
+    private CoinInfoHandler handler;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        handler = new CoinInfoHandler(10);
         return inflater.inflate(R.layout.fragment_coin_list, container, false);
+
+
     }
 }

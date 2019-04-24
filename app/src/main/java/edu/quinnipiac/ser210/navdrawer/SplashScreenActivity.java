@@ -1,6 +1,7 @@
 package edu.quinnipiac.ser210.navdrawer;
 
 import android.content.Intent;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +19,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
 
     private DrawerLayout drawer;
 
+    private CoinInfoHandler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +36,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        handler = new CoinInfoHandler(10);
         //Shows the fragment the fragment on the activity
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_splash,
@@ -58,6 +61,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
                 break;
             case R.id.nav_convert:
                 Intent intentConvert = new Intent(SplashScreenActivity.this, ConvertActivity.class);
+                intentConvert.putExtra("data", (handler.getCoinArray()));
                 SplashScreenActivity.this.startActivity(intentConvert);
                 break;
             case R.id.nav_coinList:
