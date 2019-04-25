@@ -40,7 +40,6 @@ public class ConvertFragment extends Fragment implements View.OnClickListener {
 
         ConvertFragment fragment = new ConvertFragment();
         fragment.setArguments(fragBundle);
-        new CoinInfoHandler(10);
         return fragment;
     }
 
