@@ -36,7 +36,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        handler = new CoinInfoHandler(10);
+        handler = new CoinInfoHandler(20);
         //Shows the fragment the fragment on the activity
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_splash,
@@ -66,6 +66,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
                 break;
             case R.id.nav_coinList:
                 Intent intentCoinList = new Intent(SplashScreenActivity.this, CoinListActivity.class);
+                intentCoinList.putExtra("data", (handler.getCoinArray()));
                 SplashScreenActivity.this.startActivity(intentCoinList);
                 break;
             case R.id.nav_share:
@@ -90,5 +91,9 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
         } else {
             super.onBackPressed();
         }
+    }
+
+    public CoinInfoHandler getCoinInfoHandler(){
+        return handler;
     }
 }
