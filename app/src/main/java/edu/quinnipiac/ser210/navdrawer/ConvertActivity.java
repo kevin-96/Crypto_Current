@@ -3,6 +3,7 @@ package edu.quinnipiac.ser210.navdrawer;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -16,6 +17,7 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
 
 
     private DrawerLayout drawer;
+    private CoinHolder[] coinHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,15 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+        Intent intent = getIntent();
+        ConvertFragment fragment = ConvertFragment.newInstance(intent.getExtras());
 
+
+        coinHolder = (CoinHolder[]) intent.getSerializableExtra("data");
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_convert,
-                    new ConvertFragment()).commit();
+           FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                   ft.replace(R.id.fragment_container_convert, ConvertFragment.newInstance(intent.getExtras()));
+                   ft.commit();
             navigationView.setCheckedItem(R.id.nav_convert);
         }
 
@@ -55,6 +62,7 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_coinList:
                 Intent intentCoinList = new Intent(ConvertActivity.this, CoinListActivity.class);
+                intentCoinList.putExtra("data", (coinHolder));
                 ConvertActivity.this.startActivity(intentCoinList);
                 break;
             case R.id.nav_share:

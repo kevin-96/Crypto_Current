@@ -3,6 +3,7 @@ package edu.quinnipiac.ser210.navdrawer;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 public class CoinListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    private CoinHolder[] coinHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,10 +34,14 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        Intent intent = getIntent();
+        coinHolder = (CoinHolder[]) intent.getSerializableExtra("data");
+
         if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coin_list,
-                    new CoinListFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_coinList);
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.fragment_container_coin_list, CoinListFragment.newInstance(intent.getExtras()));
+            ft.commit();
+            navigationView.setCheckedItem(R.id.nav_convert);
         }
 
     }
@@ -50,6 +56,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_convert:
                 Intent intentConvert = new Intent(CoinListActivity.this, ConvertActivity.class);
+                intentConvert.putExtra("data", (coinHolder));
                 CoinListActivity.this.startActivity(intentConvert);
                 break;
             case R.id.nav_coinList:
