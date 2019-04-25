@@ -17,6 +17,7 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
 
 
     private DrawerLayout drawer;
+    private CoinHolder[] coinHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,8 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
         Intent intent = getIntent();
         ConvertFragment fragment = ConvertFragment.newInstance(intent.getExtras());
 
-        intent.getSerializableExtra("handlerData");
+
+        coinHolder = (CoinHolder[]) intent.getSerializableExtra("data");
         if (savedInstanceState == null) {
            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                    ft.replace(R.id.fragment_container_convert, ConvertFragment.newInstance(intent.getExtras()));
@@ -52,6 +54,7 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
         switch (item.getItemId()) {
             case R.id.nav_splash:
                 Intent intentSplash = new Intent(ConvertActivity.this, SplashScreenActivity.class);
+                intentSplash.putExtra("data", (coinHolder));
                 ConvertActivity.this.startActivity(intentSplash);
                 break;
             case R.id.nav_wallet:
@@ -64,6 +67,7 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_coinList:
                 Intent intentCoinList = new Intent(ConvertActivity.this, CoinListActivity.class);
+                intentCoinList.putExtra("data", (coinHolder));
                 ConvertActivity.this.startActivity(intentCoinList);
                 break;
             case R.id.nav_share:

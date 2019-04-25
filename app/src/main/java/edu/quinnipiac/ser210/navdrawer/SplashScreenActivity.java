@@ -57,6 +57,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
                 break;
             case R.id.nav_wallet:
                 Intent intentWallet = new Intent(SplashScreenActivity.this, WalletActivity.class);
+                intentWallet.putExtra("data", (handler.getCoinArray()));
                 SplashScreenActivity.this.startActivity(intentWallet);
                 break;
             case R.id.nav_convert:
@@ -75,6 +76,7 @@ public class SplashScreenActivity extends AppCompatActivity implements Navigatio
                 break;
             case R.id.nav_setting:
                 Intent intentSetting = new Intent(SplashScreenActivity.this, SettingActivity.class);
+                intentSetting.putExtra("data", (handler.getCoinArray()));
                 SplashScreenActivity.this.startActivity(intentSetting);
                 break;
         }

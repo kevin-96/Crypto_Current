@@ -16,6 +16,7 @@ import android.widget.Toast;
 public class CoinListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
+    private CoinHolder[] coinHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
         toggle.syncState();
 
         Intent intent = getIntent();
+        coinHolder = (CoinHolder[]) intent.getSerializableExtra("data");
 
         if (savedInstanceState == null) {
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -50,6 +52,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
         switch (item.getItemId()) {
             case R.id.nav_splash:
                 Intent intentSplash = new Intent(CoinListActivity.this, SplashScreenActivity.class);
+                intentSplash.putExtra("data", (coinHolder));
                 CoinListActivity.this.startActivity(intentSplash);
                 break;
             case R.id.nav_wallet:
@@ -58,6 +61,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_convert:
                 Intent intentConvert = new Intent(CoinListActivity.this, ConvertActivity.class);
+                intentConvert.putExtra("data", (coinHolder));
                 CoinListActivity.this.startActivity(intentConvert);
                 break;
             case R.id.nav_coinList:
