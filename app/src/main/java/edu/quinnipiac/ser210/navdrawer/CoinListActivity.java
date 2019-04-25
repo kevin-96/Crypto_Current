@@ -50,11 +50,6 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_splash:
-                Intent intentSplash = new Intent(CoinListActivity.this, SplashScreenActivity.class);
-                intentSplash.putExtra("data", (coinHolder));
-                CoinListActivity.this.startActivity(intentSplash);
-                break;
             case R.id.nav_wallet:
                 Intent intentWallet = new Intent(CoinListActivity.this, WalletActivity.class);
                 CoinListActivity.this.startActivity(intentWallet);
@@ -74,6 +69,14 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_setting:
                 Intent intentSetting = new Intent(CoinListActivity.this, SettingActivity.class);
                 CoinListActivity.this.startActivity(intentSetting);
+                break;
+            case R.id.nav_create:
+                Intent intentCreate = new Intent(CoinListActivity.this, CreateWalletActivity.class);
+                CoinListActivity.this.startActivity(intentCreate);
+                break;
+            case R.id.nav_delete:
+                Intent intentDelete = new Intent(CoinListActivity.this, DeleteWalletActivity.class);
+                CoinListActivity.this.startActivity(intentDelete);
                 break;
         }
 

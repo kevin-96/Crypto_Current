@@ -1,9 +1,11 @@
 package edu.quinnipiac.ser210.navdrawer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -15,87 +17,23 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class SplashScreenActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class SplashScreenActivity extends AppCompatActivity {
 
-    private DrawerLayout drawer;
+
 
     private CoinInfoHandler handler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
-        // gives the activity a tool bar
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Creates the drawer
-        drawer = findViewById(R.id.drawer_layout_splash);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_splash,
+                new SplashScreenFragment()).commit();
         handler = new CoinInfoHandler(20);
-        //Shows the fragment the fragment on the activity
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_splash,
-                    new SplashScreenFragment()).commit();
-            navigationView.setCheckedItem(R.id.nav_splash);
-        }
-
+    
     }
-
-    // The following is for the navigation drawer so it calls new activities when the selected item is clicked
-    // Will remove the drawer in the splash screen for final product, only here for debugging purposes
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_splash:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_splash,
-                        new SplashScreenFragment()).commit();
-                break;
-            case R.id.nav_wallet:
-                Intent intentWallet = new Intent(SplashScreenActivity.this, WalletActivity.class);
-                intentWallet.putExtra("data", (handler.getCoinArray()));
-                SplashScreenActivity.this.startActivity(intentWallet);
-                break;
-            case R.id.nav_convert:
-                Intent intentConvert = new Intent(SplashScreenActivity.this, ConvertActivity.class);
-                intentConvert.putExtra("data", (handler.getCoinArray()));
-                SplashScreenActivity.this.startActivity(intentConvert);
-                break;
-            case R.id.nav_coinList:
-                Intent intentCoinList = new Intent(SplashScreenActivity.this, CoinListActivity.class);
-                intentCoinList.putExtra("data", (handler.getCoinArray()));
-                SplashScreenActivity.this.startActivity(intentCoinList);
-                break;
-            case R.id.nav_share:
-                // The toast is a placeholder in the meantime until we retrieve data to share
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.nav_setting:
-                Intent intentSetting = new Intent(SplashScreenActivity.this, SettingActivity.class);
-                intentSetting.putExtra("data", (handler.getCoinArray()));
-                SplashScreenActivity.this.startActivity(intentSetting);
-                break;
-        }
-
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
     public CoinInfoHandler getCoinInfoHandler(){
         return handler;
     }
+
 }
