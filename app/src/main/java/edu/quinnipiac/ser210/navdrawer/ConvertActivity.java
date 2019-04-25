@@ -45,10 +45,6 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_splash:
-                Intent intentSplash = new Intent(ConvertActivity.this, SplashScreenActivity.class);
-                ConvertActivity.this.startActivity(intentSplash);
-                break;
             case R.id.nav_wallet:
                 Intent intentWallet = new Intent(ConvertActivity.this, WalletActivity.class);
                 ConvertActivity.this.startActivity(intentWallet);
@@ -67,6 +63,14 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_setting:
                 Intent intentSetting = new Intent(ConvertActivity.this, SettingActivity.class);
                 ConvertActivity.this.startActivity(intentSetting);
+                break;
+            case R.id.nav_create:
+                Intent intentCreate = new Intent(ConvertActivity.this, CreateWalletActivity.class);
+                ConvertActivity.this.startActivity(intentCreate);
+                break;
+            case R.id.nav_delete:
+                Intent intentDelete = new Intent(ConvertActivity.this, DeleteWalletActivity.class);
+                ConvertActivity.this.startActivity(intentDelete);
                 break;
         }
 

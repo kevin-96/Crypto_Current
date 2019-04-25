@@ -43,10 +43,6 @@ public class SettingActivity extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.nav_splash:
-                Intent intentSplash = new Intent(SettingActivity.this, SplashScreenActivity.class);
-                SettingActivity.this.startActivity(intentSplash);
-                break;
             case R.id.nav_wallet:
                 Intent intentWallet = new Intent(SettingActivity.this, WalletActivity.class);
                 SettingActivity.this.startActivity(intentWallet);
@@ -65,6 +61,14 @@ public class SettingActivity extends AppCompatActivity implements NavigationView
             case R.id.nav_setting:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_setting,
                         new SettingFragment()).commit();
+                break;
+            case R.id.nav_create:
+                Intent intentCreate = new Intent(SettingActivity.this, CreateWalletActivity.class);
+                SettingActivity.this.startActivity(intentCreate);
+                break;
+            case R.id.nav_delete:
+                Intent intentDelete = new Intent(SettingActivity.this, DeleteWalletActivity.class);
+                SettingActivity.this.startActivity(intentDelete);
                 break;
         }
 
