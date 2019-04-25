@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 public class WalletActivity extends CardWalletFragment implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
+    private CoinInfoHandler handler;
+    private CoinHolder[] coinHolder;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -21,6 +23,7 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
         setContentView(R.layout.activity_main);
         // links the tool bar to the activity
         Toolbar toolbar = findViewById(R.id.toolbar);
+        handler = new CoinInfoHandler(20);
         setSupportActionBar(toolbar);
         // links the navigation drawer
         drawer = findViewById(R.id.drawer_layout_wallet);
@@ -49,10 +52,14 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
                 break;
             case R.id.nav_convert:
                 Intent intentConvert = new Intent(WalletActivity.this, ConvertActivity.class);
+                coinHolder = handler.getCoinArray();
+                intentConvert.putExtra("data", (coinHolder));
                 WalletActivity.this.startActivity(intentConvert);
                 break;
             case R.id.nav_coinList:
                 Intent intentCoinList = new Intent(WalletActivity.this, CoinListActivity.class);
+                coinHolder = handler.getCoinArray();
+                intentCoinList.putExtra("data", (coinHolder));
                 WalletActivity.this.startActivity(intentCoinList);
                 break;
             case R.id.nav_share:

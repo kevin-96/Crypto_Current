@@ -14,7 +14,7 @@ public class CoinHolderTest extends TestCase {
     }
 
     public void testGetName() {
-        assertEquals("gh", mCoinHolder.getName());
+        assertEquals("Bitcoin", mCoinHolder.getName());
     }
 
     public void testGetSymbol() {

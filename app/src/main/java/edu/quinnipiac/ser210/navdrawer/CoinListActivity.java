@@ -41,7 +41,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container_coin_list, CoinListFragment.newInstance(intent.getExtras()));
             ft.commit();
-            navigationView.setCheckedItem(R.id.nav_convert);
+            navigationView.setCheckedItem(R.id.nav_coinList);
         }
 
     }

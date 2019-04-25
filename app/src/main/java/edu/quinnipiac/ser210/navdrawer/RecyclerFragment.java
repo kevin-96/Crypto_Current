@@ -39,6 +39,7 @@ public class RecyclerFragment extends Fragment {
         listOfWalletNames.add("Work2");
         listOfWalletNames.add("Savings");
         listOfWalletNames.add("Travel");
+        listOfWalletNames.add("SER210 :D");
 
         List<String> listOfAmountNames = new ArrayList<>();
         listOfAmountNames.add("Bitcoin");
@@ -47,6 +48,7 @@ public class RecyclerFragment extends Fragment {
         listOfAmountNames.add("LiteCoin");
         listOfAmountNames.add("XRP");
         listOfAmountNames.add("Jah Coin");
+        listOfAmountNames.add("AndroidCoin");
 
         List<String> listOfCoinNames = new ArrayList<>();
         listOfCoinNames.add("12.34");
@@ -55,6 +57,7 @@ public class RecyclerFragment extends Fragment {
         listOfCoinNames.add("3902.74");
         listOfCoinNames.add("408.98");
         listOfCoinNames.add("420.20");
+        listOfCoinNames.add("123.45");
 
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
