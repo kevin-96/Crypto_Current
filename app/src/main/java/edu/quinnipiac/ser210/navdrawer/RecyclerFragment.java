@@ -39,6 +39,8 @@ public class RecyclerFragment extends Fragment {
         //ArrayList<String> wallets = db.getAllWallets();
         //Log.e("arraylist", String.valueOf(wallets));
 
+        // The following list are hardcoded for demo purpose, will be deleted after we get the
+        // database working
         List<String> listOfWalletNames = new ArrayList<>();
         listOfWalletNames.add("Home");
         listOfWalletNames.add("Work");
@@ -114,6 +116,7 @@ public class RecyclerFragment extends Fragment {
             return new RecyclerViewHolder(inflater, viewGroup);
         }
 
+        // This sets the text of each card/wallet in the card view 
         @Override
         public void onBindViewHolder(@NonNull RecyclerViewHolder recyclerViewHolder, int i) {
             recyclerViewHolder.mNameView.setText(walletName.get(i));
@@ -121,6 +124,7 @@ public class RecyclerFragment extends Fragment {
             recyclerViewHolder.mCoinView.setText(coinName.get(i));
         }
 
+        // This creates cards depending on the items of the list.
         @Override
         public int getItemCount() {
             return walletName.size();
