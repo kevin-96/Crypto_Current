@@ -1,3 +1,10 @@
+/*
+ * This fragment is in charge of the wallets for the wallet activity. It will have 
+ * a recycler view with a card view inside of it.
+ *
+ * Dev's: Kevin Sangurima, Brian Carballo
+ */
+
 package edu.quinnipiac.ser210.navdrawer;
 
 import android.os.Bundle;
