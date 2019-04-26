@@ -16,6 +16,15 @@ import java.lang.reflect.Array;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * Coin Info Handler (Java Class)
+ * Created by Brian Carballo
+ * Crypto-Current
+ *
+ * Class serves as the backend connection to API's. Handler handles most processes that involve
+ * coin information. Class can create a ranked list of coins in an array. Class can convert between
+ * cryptocurrency and regular currency.
+ */
 public class CoinInfoHandler {
 
     private JSONObject CoinInformation;
@@ -29,36 +38,49 @@ public class CoinInfoHandler {
     private Boolean running;
 
 
+    //Default constructor, used when a ranked list needs to be created or updated
     public CoinInfoHandler(int length){
-        new FetchCoinValue().execute("");
+        //Creates new async task to create coin list
+        new FetchRankedCoinList().execute("");
+        //Sets default values;
         LIST_LENGTH = length;
         convertComplete = false;
 
     }
 
+    //Modified constructor, used to keep data constant when switching between activities
     public CoinInfoHandler(CoinHolder[] coinArray){
+        //Creates a handler with existing data
         this.coinArray = coinArray;
         LIST_LENGTH = coinArray.length;
         convertComplete = false;
     }
 
+    //Starts the process for conversion and returns result
     public String executeConversion(String coinAmount, String coin, String currency){
         new ConvertCoin().execute(coinAmount,currency, coin);
        return conversionResult;
     }
 
+    //JSON reader method used in conversion
     private String convert(JSONObject jsonObject) throws JSONException {
+        //Debug
         Log.d("Coin", jsonObject.toString());
+
+        //Grabs value from JSON and updates handler value
         String value = jsonObject.getString("to_quantity");
         conversionResult = value;
         convertComplete = true;
         return value;
     }
 
+    //Parses JSON and places values into an array of CoinHolders
     private void createCoinList(){
         try {
             coinArray = new CoinHolder[LIST_LENGTH];
+            //References a JSON array to avoid redundant code in for loop
             JSONArray list =  CoinInformation.getJSONObject("contextWrites").getJSONArray("to");
+            //Creates CoinHolders for each coin and places them in ranked order in an array
             for(int i = 0; i < LIST_LENGTH; i++){
                 JSONObject tempObject = list.getJSONObject(i);
                 coinArray[i] = new CoinHolder(tempObject.getString("name"),tempObject.getString("symbol"),tempObject.getInt("rank"),tempObject.getInt("price_usd"));
@@ -69,17 +91,21 @@ public class CoinInfoHandler {
 
     }
 
+    //Method for accessing CoinHolder array
     public CoinHolder[] getCoinArray(){
         return coinArray;
     }
 
+    //Prints out the contents of a CoinHolder array for debugging purposes
     public void printCoinArray(){
         for(int i = 0; i < coinArray.length; i++){
             Log.d("Coin " + i, "\nName: " + coinArray[i].getName() + "\nSymbol: " + coinArray[i].getSymbol() + "\nRank: " + coinArray[i].getRank() + "\nValue: " + coinArray[i].getValue());
         }
     }
 
-    private class FetchCoinValue extends AsyncTask<String,Void,JSONObject> {
+
+    //Async Class for ranked coin list API
+    private class FetchRankedCoinList extends AsyncTask<String,Void,JSONObject> {
 
         @Override
         protected JSONObject doInBackground(String... params) {
@@ -88,6 +114,7 @@ public class CoinInfoHandler {
             BufferedReader reader =null;
 
             try {
+                //Creates URL and adds properties, then connects
                 URL url = new URL("https://CoinMarketCapzakutynskyV1.p.rapidapi.com/getCryptocurrenciesList");
 
                 urlConnection = (HttpURLConnection) url.openConnection();
@@ -97,15 +124,19 @@ public class CoinInfoHandler {
                 urlConnection.addRequestProperty("Content-Type", "application/x-www-form-urlencoded");
                 urlConnection.connect();
 
+                //Grabs destination content
                 InputStream in = urlConnection.getInputStream();
                 if (in == null) {
                     return null;
                 }
+
+                //Parses input into a string, then returns it as a JSON Object
                 reader  = new BufferedReader(new InputStreamReader(in));
                 String coinValueJsonString = getBufferStringFromBuffer(reader).toString();
                 return new JSONObject(coinValueJsonString);
 
 
+            //Exception handlers and connection closers
             }catch(Exception e){
                 e.printStackTrace();
                 return null;
@@ -128,7 +159,9 @@ public class CoinInfoHandler {
         protected void onPostExecute(JSONObject result){
             CoinInformation = result;
             try {
+                //Prints out item from JSON for debugging purposes
                 Log.d("Working JSON", CoinInformation.getJSONObject("contextWrites").getJSONArray("to").getJSONObject(0).getString("id"));
+                //Creates a CoinList and prints for debugging
                 createCoinList();
                 printCoinArray();
             } catch (JSONException e) {
@@ -137,6 +170,8 @@ public class CoinInfoHandler {
         }
     }
 
+
+    //Async Task for Conversion API
     private class ConvertCoin extends AsyncTask<String,Void,String> {
 
         @Override

@@ -13,6 +13,14 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+/**
+ * Coin List Activity
+ * Created by Kevin Sangurima and Brian Carballo
+ * Crypto-Current
+ *
+ * Activity holds a Coin List Fragment and handles communication between activities
+ *
+ */
 public class CoinListActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private DrawerLayout drawer;
@@ -22,6 +30,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_list);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -34,10 +43,12 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Grabs intent and gets CoinHolder Array for handler creation
         Intent intent = getIntent();
         coinHolder = (CoinHolder[]) intent.getSerializableExtra("data");
 
         if (savedInstanceState == null) {
+            //Creates a new fragment and displays
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.fragment_container_coin_list, CoinListFragment.newInstance(intent.getExtras()));
             ft.commit();
@@ -56,6 +67,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
                 break;
             case R.id.nav_convert:
                 Intent intentConvert = new Intent(CoinListActivity.this, ConvertActivity.class);
+                //Passes CoinHolder array to next activity
                 intentConvert.putExtra("data", (coinHolder));
                 CoinListActivity.this.startActivity(intentConvert);
                 break;
