@@ -21,6 +21,7 @@ public class SettingActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Settings");
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout_setting);

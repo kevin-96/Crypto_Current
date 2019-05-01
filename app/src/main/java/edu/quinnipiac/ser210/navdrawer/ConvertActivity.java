@@ -24,6 +24,7 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_convert);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Coin Converter");
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout_convert);

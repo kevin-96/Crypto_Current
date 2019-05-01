@@ -23,6 +23,7 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coin_list);
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Top 20 Cryptocurrencies");
         setSupportActionBar(toolbar);
 
         drawer = findViewById(R.id.drawer_layout_convert);
