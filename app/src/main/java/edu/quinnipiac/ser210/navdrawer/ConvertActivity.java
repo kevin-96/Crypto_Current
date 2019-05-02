@@ -1,3 +1,11 @@
+/*
+ * This activity serves a container for the fragment as well as it has all the code for the nvaigation drawer
+ * that will be used in this activity
+ *
+ * Dev's: Kevin Sangurima, Brian Carballo
+ *
+ */
+
 package edu.quinnipiac.ser210.navdrawer;
 
 import android.content.Intent;
@@ -23,10 +31,11 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_convert);
+        // Finds the toolbar and sets its support
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("Coin Converter");
         setSupportActionBar(toolbar);
-
+        // Finds the navigation drawer
         drawer = findViewById(R.id.drawer_layout_convert);
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
