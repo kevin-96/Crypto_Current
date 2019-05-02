@@ -4,6 +4,7 @@
 package edu.quinnipiac.ser210.navdrawer;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -19,6 +20,15 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -28,8 +38,12 @@ public class ConvertFragment extends Fragment implements View.OnClickListener {
     private String coinName;
     private String currencyName;
     private String coinAmount;
-    private String result;
+    public String coinResult;
     EditText text;
+    private Boolean display;
+    private String url1 = "https://bravenewcoin-v1.p.rapidapi.com/convert?qty=";
+    private String url2 = "&from=";
+    private String url3 = "&to=";
 
 
     public ConvertFragment(){
@@ -98,10 +112,87 @@ public class ConvertFragment extends Fragment implements View.OnClickListener {
     }
     public void onClick(View v) {
         coinAmount = text.getText().toString();
-        result = handler.executeConversion(coinAmount,coinName, currencyName);
-        Intent intent = new Intent(getActivity(), ResultActivity.class);
-        intent.putExtra("message",  coinAmount + " " + coinName + " is worth: " + result + " " + currencyName);
-        startActivity(intent);
+        new ConvertCoin().execute(coinAmount,coinName, currencyName);
+
     }
 
+    //Async Task for Conversion API
+    private class ConvertCoin extends AsyncTask<String,Void,String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+
+            HttpURLConnection urlConnection =null;
+            BufferedReader reader =null;
+
+            try {
+                URL url = new URL(url1 + params[0] + url2 + params[1] + url3 + params[2]);
+
+                urlConnection = (HttpURLConnection) url.openConnection();
+                urlConnection.setRequestMethod("GET");
+                urlConnection.setRequestProperty("X-RapidAPI-Key","006da6b0d5msh97aaea208d3f61fp1a7561jsn5292b28eff9a");
+
+                urlConnection.connect();
+
+                InputStream in = urlConnection.getInputStream();
+                if (in == null) {
+                    return null;
+                }
+                reader  = new BufferedReader(new InputStreamReader(in));
+                // call getBufferString to get the string from the buffer.
+
+                String coinValueJsonString = getBufferStringFromBuffer(reader).toString();
+
+
+                return convert(new JSONObject(coinValueJsonString));
+
+            }catch(Exception e){
+                e.printStackTrace();
+                return null;
+            }finally{
+                if (urlConnection != null){
+                    urlConnection.disconnect();
+                }
+                if (reader != null){
+                    try{
+                        reader.close();
+                    }catch (IOException e){
+                        return null;
+                    }
+                }
+            }
+
+        }
+
+        protected void onPostExecute(String result){
+            coinResult = result;
+            Intent intent = new Intent(getActivity(), ResultActivity.class);
+            intent.putExtra("message",  coinAmount + " " + coinName + " is worth: " + coinResult + " " + currencyName);
+            startActivity(intent);
+        }
+
+    }
+
+    private StringBuffer getBufferStringFromBuffer(BufferedReader br) throws Exception{
+        StringBuffer buffer = new StringBuffer();
+
+        String line;
+        while((line = br.readLine()) != null){
+            buffer.append(line + '\n');
+        }
+
+        if (buffer.length() == 0)
+            return null;
+
+        return buffer;
+    }
+    //JSON reader method used in conversion
+    private String convert(JSONObject jsonObject) throws JSONException {
+        //Debug
+        Log.d("Coin", jsonObject.toString());
+
+        //Grabs value from JSON and updates handler value
+        String value = jsonObject.getString("to_quantity");
+        return value;
+    }
 }
