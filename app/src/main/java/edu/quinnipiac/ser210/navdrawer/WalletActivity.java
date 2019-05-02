@@ -10,6 +10,8 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 public class WalletActivity extends CardWalletFragment implements NavigationView.OnNavigationItemSelectedListener {
@@ -23,6 +25,7 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
         setContentView(R.layout.activity_main);
         // links the tool bar to the activity
         Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Wallets");
         handler = new CoinInfoHandler(20);
         setSupportActionBar(toolbar);
         // links the navigation drawer
@@ -34,6 +37,7 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -62,8 +66,8 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
                 intentCoinList.putExtra("data", (coinHolder));
                 WalletActivity.this.startActivity(intentCoinList);
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+            case R.id.nav_developer:
+                Toast.makeText(this, "Developers: Kevin Sangurima, Brian Carballo", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:
                 Intent intentSetting = new Intent(WalletActivity.this, SettingActivity.class);
@@ -73,10 +77,7 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
                 Intent intentCreate = new Intent(WalletActivity.this, CreateWalletActivity.class);
                 WalletActivity.this.startActivity(intentCreate);
                 break;
-            case R.id.nav_delete:
-                Intent intentDelete = new Intent(WalletActivity.this, DeleteWalletActivity.class);
-                WalletActivity.this.startActivity(intentDelete);
-                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -95,5 +96,9 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
         } else {
             super.onBackPressed();
         }
+    }
+
+    public void delete(View view) {
+
     }
 }

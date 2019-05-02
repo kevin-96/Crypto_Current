@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -18,8 +19,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String COLUMN_COIN = "coin";
     public static final String COLUMN_QUANTITY = "quantity";
 
-    public static final String DATABASE_NAME = "cryptocurrent.db";
-    private static final int DATABASE_VERSION = 1;
+    public static final String DATABASE_NAME = "cryptodb";
+    private static final int DATABASE_VERSION = 2;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
@@ -34,7 +35,15 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL(DATABASE_CREATE);
+        {
+            try{
+                db.execSQL(DATABASE_CREATE);
+            }
+            catch(SQLException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override
@@ -87,6 +96,9 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
                 new String[]{Integer.toString(id)});
     }
 
+
+
+
     public ArrayList<String> getAllWallets() {
         ArrayList<String> array_list = new ArrayList<String>();
 
@@ -103,4 +115,5 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
         Log.v("dbv", String.valueOf(array_list));
         return array_list;
     }
+
 }
