@@ -7,6 +7,8 @@
 
 package edu.quinnipiac.ser210.navdrawer;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -25,7 +28,12 @@ import java.util.List;
 
 public class RecyclerFragment extends Fragment {
 
-    private MySQLiteHelper db = new MySQLiteHelper(getContext());
+    private MySQLiteHelper walletDB;
+    private SQLiteDatabase db;
+
+
+    private Cursor cursor;
+
 
     public static Fragment newInstance(){
         return new RecyclerFragment();
@@ -36,42 +44,27 @@ public class RecyclerFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.recycler_view_fragment, container, false);
 
-        //ArrayList<String> wallets = db.getAllWallets();
-        //Log.e("arraylist", String.valueOf(wallets));
-
-        // The following list are hardcoded for demo purpose, will be deleted after we get the
-        // database working
+        walletDB = new MySQLiteHelper(getContext());
+        db = walletDB.getReadableDatabase();
+        cursor = db.rawQuery("SELECT * FROM wallets",null,null);
+        cursor.moveToLast();
         List<String> listOfWalletNames = new ArrayList<>();
-        listOfWalletNames.add("Home");
-        listOfWalletNames.add("Work");
-        listOfWalletNames.add("Home2");
-        listOfWalletNames.add("Work2");
-        listOfWalletNames.add("Savings");
-        listOfWalletNames.add("Travel");
-        listOfWalletNames.add("SER210 :D");
-
         List<String> listOfAmountNames = new ArrayList<>();
-        listOfAmountNames.add("Bitcoin");
-        listOfAmountNames.add("XRP");
-        listOfAmountNames.add("NANO");
-        listOfAmountNames.add("LiteCoin");
-        listOfAmountNames.add("XRP");
-        listOfAmountNames.add("Jah Coin");
-        listOfAmountNames.add("AndroidCoin");
-
         List<String> listOfCoinNames = new ArrayList<>();
-        listOfCoinNames.add("12.34");
-        listOfCoinNames.add("6329.23");
-        listOfCoinNames.add("1679.69");
-        listOfCoinNames.add("3902.74");
-        listOfCoinNames.add("408.98");
-        listOfCoinNames.add("420.20");
-        listOfCoinNames.add("123.45");
-
+        while(!cursor.isBeforeFirst()){
+            listOfWalletNames.add(cursor.getString(1));
+            listOfCoinNames.add(cursor.getString(3));
+            listOfAmountNames.add(cursor.getString(2));
+            cursor.moveToPrevious();
+        }
+        cursor.close();
+        db.close();
 
         RecyclerView recyclerView = view.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(new RecyclerViewAdapter(listOfWalletNames, listOfCoinNames, listOfAmountNames));
+
+
 
         return view;
     }
@@ -96,6 +89,7 @@ public class RecyclerFragment extends Fragment {
 
         }
     }
+
 
     private class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewHolder>{
 

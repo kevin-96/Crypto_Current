@@ -14,13 +14,15 @@
         android:id="@+id/name_holder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|left"
+        android:layout_gravity="top|left"
+        android:textSize="45dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center|right"
+        android:layout_gravity="top|right"
+        android:textSize="40dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:id="@+id/amount_holder"/>
 
@@ -28,6 +30,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|left"
+        android:textSize="35dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:id="@+id/coin_holder"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:id="@+id/delete_button"
+        android:text="Delete"
+        android:onClick="delete"/>
 </android.support.v7.widget.CardView>
