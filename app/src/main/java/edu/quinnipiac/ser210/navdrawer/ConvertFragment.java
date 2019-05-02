@@ -3,6 +3,7 @@
  */
 package edu.quinnipiac.ser210.navdrawer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -98,9 +99,9 @@ public class ConvertFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         coinAmount = text.getText().toString();
         result = handler.executeConversion(coinAmount,coinName, currencyName);
-        Snackbar snackBar = Snackbar.make(getActivity().findViewById(android.R.id.content),
-               "Your " + coinAmount + " " + coinName + " is worth: " + result + " " + currencyName, Snackbar.LENGTH_LONG);
-        snackBar.show();;
+        Intent intent = new Intent(getActivity(), ResultActivity.class);
+        intent.putExtra("message",  coinAmount + " " + coinName + " is worth: " + result + " " + currencyName);
+        startActivity(intent);
     }
 
 }

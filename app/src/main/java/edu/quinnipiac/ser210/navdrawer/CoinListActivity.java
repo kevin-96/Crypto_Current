@@ -64,8 +64,8 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_coin_list,
                         new CoinListFragment()).commit();
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+            case R.id.nav_developer:
+                Toast.makeText(this, "Developers: Kevin Sangurima, Brian Carballo", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:
                 Intent intentSetting = new Intent(CoinListActivity.this, SettingActivity.class);
@@ -74,10 +74,6 @@ public class CoinListActivity extends AppCompatActivity implements NavigationVie
             case R.id.nav_create:
                 Intent intentCreate = new Intent(CoinListActivity.this, CreateWalletActivity.class);
                 CoinListActivity.this.startActivity(intentCreate);
-                break;
-            case R.id.nav_delete:
-                Intent intentDelete = new Intent(CoinListActivity.this, DeleteWalletActivity.class);
-                CoinListActivity.this.startActivity(intentDelete);
                 break;
         }
 

@@ -66,8 +66,8 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
                 intentCoinList.putExtra("data", (coinHolder));
                 WalletActivity.this.startActivity(intentCoinList);
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+            case R.id.nav_developer:
+                Toast.makeText(this, "Developers: Kevin Sangurima, Brian Carballo", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:
                 Intent intentSetting = new Intent(WalletActivity.this, SettingActivity.class);
@@ -77,10 +77,7 @@ public class WalletActivity extends CardWalletFragment implements NavigationView
                 Intent intentCreate = new Intent(WalletActivity.this, CreateWalletActivity.class);
                 WalletActivity.this.startActivity(intentCreate);
                 break;
-            case R.id.nav_delete:
-                Intent intentDelete = new Intent(WalletActivity.this, DeleteWalletActivity.class);
-                WalletActivity.this.startActivity(intentDelete);
-                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);

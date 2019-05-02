@@ -15,6 +15,7 @@ import android.widget.Toast;
 public class SettingActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout drawer;
     private CoinInfoHandler handler;
+    private CoinHolder[] coinHolder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,14 +53,18 @@ public class SettingActivity extends AppCompatActivity implements NavigationView
                 break;
             case R.id.nav_convert:
                 Intent intentConvert = new Intent(SettingActivity.this, ConvertActivity.class);
+                coinHolder = handler.getCoinArray();
+                intentConvert.putExtra("data", (coinHolder));
                 SettingActivity.this.startActivity(intentConvert);
                 break;
             case R.id.nav_coinList:
                 Intent intentCoinList = new Intent(SettingActivity.this, CoinListActivity.class);
+                coinHolder = handler.getCoinArray();
+                intentCoinList.putExtra("data", (coinHolder));
                 SettingActivity.this.startActivity(intentCoinList);
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+            case R.id.nav_developer:
+                Toast.makeText(this, "Developers: Kevin Sangurima, Brian Carballo", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container_setting,
@@ -69,10 +74,7 @@ public class SettingActivity extends AppCompatActivity implements NavigationView
                 Intent intentCreate = new Intent(SettingActivity.this, CreateWalletActivity.class);
                 SettingActivity.this.startActivity(intentCreate);
                 break;
-            case R.id.nav_delete:
-                Intent intentDelete = new Intent(SettingActivity.this, DeleteWalletActivity.class);
-                SettingActivity.this.startActivity(intentDelete);
-                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);

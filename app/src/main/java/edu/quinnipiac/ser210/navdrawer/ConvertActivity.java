@@ -66,8 +66,8 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
                 intentCoinList.putExtra("data", (coinHolder));
                 ConvertActivity.this.startActivity(intentCoinList);
                 break;
-            case R.id.nav_share:
-                Toast.makeText(this, "Share", Toast.LENGTH_SHORT).show();
+            case R.id.nav_developer:
+                Toast.makeText(this, "Developers: Kevin Sangurima, Brian Carballo", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.nav_setting:
                 Intent intentSetting = new Intent(ConvertActivity.this, SettingActivity.class);
@@ -77,10 +77,7 @@ public class ConvertActivity extends AppCompatActivity implements NavigationView
                 Intent intentCreate = new Intent(ConvertActivity.this, CreateWalletActivity.class);
                 ConvertActivity.this.startActivity(intentCreate);
                 break;
-            case R.id.nav_delete:
-                Intent intentDelete = new Intent(ConvertActivity.this, DeleteWalletActivity.class);
-                ConvertActivity.this.startActivity(intentDelete);
-                break;
+
         }
 
         drawer.closeDrawer(GravityCompat.START);
